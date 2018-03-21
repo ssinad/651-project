@@ -6,20 +6,20 @@
 
 """
 
-from utils import rand_norm, rand_in_range, rand_un
+# from utils import rand_norm, rand_in_range, rand_un
 import numpy as np
 
 current_state = None
-N = 5
+N = 100
 
-def max_reward():
-    return 1
-
-def min_reward():
-    return 0
-
-def number_of_states():
-    return N
+# def max_reward():
+#     return 1
+#
+# def min_reward():
+#     return 0
+#
+# def number_of_states():
+#     return N
 
 def env_init():
     global current_state, start, num_total_states

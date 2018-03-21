@@ -10,7 +10,7 @@
 """
 
 from rl_glue import *  # Required for RL-Glue
-RLGlue("mountaincar", "agent")
+RLGlue("env", "agent")
 
 import numpy as np
 
@@ -27,4 +27,4 @@ if __name__ == "__main__":
             # print '\tepisode {}'.format(e+1)
             RL_episode(0)
             steps[r,e] = RL_num_steps()
-    np.save('steps',steps)
+    np.save('Value', RL_agent_message("ValueFunction"))
