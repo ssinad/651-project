@@ -14,10 +14,13 @@ import pickle
 N = 100
 p = 0.1
 gamma = 0.9
-v = np.zeros(N) # [0 for tmp in range(N)]
+seed = 0
+v = np.zeros(N)  # [0 for tmp in range(N)]
 num = np.zeros(N)
 states = None
 rewards = None
+dp = True
+epsilon = 1
 
 def max_reward():
     return 1
@@ -27,6 +30,10 @@ def min_reward():
 
 def number_of_states():
     return N
+
+
+def GS():
+    return (max_reward() - min_reward()) / (1 - gamma)
 
 def choose_action():
     toss = np.random.uniform()
@@ -68,7 +75,10 @@ def agent_step(reward, state): # returns NumPy array, reward: floating point, th
     # select an action, based on Q
     action = choose_action()
     states.append(np.copy(state))
-    rewards.append(reward)
+    noise = 0
+    if dp:
+        noise = np.random.laplace(scale=GS() / epsilon)
+    rewards.append(reward + noise)
     return action
 
 def agent_end(reward):
@@ -77,7 +87,10 @@ def agent_end(reward):
     Returns: Nothing
     """
     global states, rewards, v, num
-    rewards.append(reward)
+    noise = 0
+    if dp:
+        noise = np.random.laplace(scale=GS() / epsilon)
+    rewards.append(reward + noise)
     # do learning and update pi
     return_so_far = 0
     unique_states = set()
