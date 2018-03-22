@@ -75,10 +75,10 @@ def agent_step(reward, state): # returns NumPy array, reward: floating point, th
     # select an action, based on Q
     action = choose_action()
     states.append(np.copy(state))
-    noise = 0
-    if dp:
-        noise = np.random.laplace(scale=GS() / epsilon)
-    rewards.append(reward + noise)
+    # noise = 0
+    # if dp:
+    #     noise = np.random.laplace(scale=GS() / epsilon)
+    rewards.append(reward)
     return action
 
 def agent_end(reward):
@@ -87,10 +87,8 @@ def agent_end(reward):
     Returns: Nothing
     """
     global states, rewards, v, num
-    noise = 0
-    if dp:
-        noise = np.random.laplace(scale=GS() / epsilon)
-    rewards.append(reward + noise)
+
+    rewards.append(reward)
     # do learning and update pi
     return_so_far = 0
     unique_states = set()
@@ -124,7 +122,10 @@ def agent_message(in_message): # returns string, in_message: string
     """
     # should not need to modify this function. Modify at your own risk
     if (in_message == 'ValueFunction'):
-        return v
+        noise = 0
+        if dp:
+            noise = np.random.laplace(size=v.shape, scale=GS() / epsilon)
+        return v + noise
     else:
         return "I don't know what to return!!"
 
