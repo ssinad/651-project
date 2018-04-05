@@ -20,7 +20,7 @@ v = np.zeros(N)  # [0 for tmp in range(N)]
 num = np.zeros(N)
 states = None
 rewards = None
-dp = True
+dp = False
 epsilon = 1
 
 
@@ -84,7 +84,7 @@ def agent_end(reward):
     # do learning and update pi
     return_so_far = 0
     unique_states = set()
-    returns = np.zeros(N)
+    returns = np.copy(v)
     for i in range(len(states) - 1, -1, -1):
         state = int(states[i][0])
         if state not in unique_states:
