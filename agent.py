@@ -9,10 +9,10 @@
 
 # from utils import rand_in_range, rand_un
 import numpy as np
-from env import N
+from env import number_of_states, max_reward, min_reward
 import pickle
 
-# N = 10
+N = number_of_states()
 p = 0.1
 gamma = 0.9
 seed = 0
@@ -22,15 +22,6 @@ states = None
 rewards = None
 dp = True
 epsilon = 1
-
-def max_reward():
-    return 1
-
-def min_reward():
-    return 0
-
-def number_of_states():
-    return N
 
 
 def GS():

@@ -9,14 +9,14 @@
 
 """
 import numpy as np
-from env import N
+from env import number_of_states
 from rl_glue import *  # Required for RL-Glue
 RLGlue("env", "agent")
 
 if __name__ == "__main__":
     num_episodes = 200
     num_runs = 50
-    # N = 10
+    N = number_of_states()
     runs = np.zeros((num_runs, N))
 
     steps = np.zeros([num_runs,num_episodes])

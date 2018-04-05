@@ -10,16 +10,16 @@
 import numpy as np
 
 current_state = None
-N = 10
+N = 100
 
-# def max_reward():
-#     return 1
+def max_reward():
+    return 1
+
+def min_reward():
+    return 0
 #
-# def min_reward():
-#     return 0
-#
-# def number_of_states():
-#     return N
+def number_of_states():
+    return N
 
 def env_init():
     global current_state, start, num_total_states
