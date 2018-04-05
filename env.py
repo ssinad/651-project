@@ -10,7 +10,7 @@
 import numpy as np
 
 current_state = None
-N = 100
+N = 10
 
 # def max_reward():
 #     return 1

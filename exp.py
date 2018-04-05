@@ -8,17 +8,15 @@
   Last Modified on: 21/11/2017
 
 """
-
+import numpy as np
+from env import N
 from rl_glue import *  # Required for RL-Glue
 RLGlue("env", "agent")
-
-
-import numpy as np
 
 if __name__ == "__main__":
     num_episodes = 200
     num_runs = 50
-    N = 100
+    # N = 10
     runs = np.zeros((num_runs, N))
 
     steps = np.zeros([num_runs,num_episodes])

@@ -9,9 +9,10 @@
 
 # from utils import rand_in_range, rand_un
 import numpy as np
+from env import N
 import pickle
 
-N = 100
+# N = 10
 p = 0.1
 gamma = 0.9
 seed = 0
