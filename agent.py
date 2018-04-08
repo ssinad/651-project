@@ -115,8 +115,8 @@ def agent_message(in_message): # returns string, in_message: string
     # should not need to modify this function. Modify at your own risk
     if (in_message == 'ValueFunction'):
         noise = 0
-        if dp:
-            noise = np.random.laplace(size=v.shape, scale=GS() / epsilon)
+        # if dp:
+        #     noise = np.random.laplace(size=v.shape, scale=GS() / epsilon)
         return v + noise
     else:
         return "I don't know what to return!!"

@@ -11,13 +11,17 @@ import numpy as np
 
 current_state = None
 N = 100
+epsilon = 1
+dp = True
 
 def max_reward():
     return 1
 
 def min_reward():
     return 0
-#
+def GS():
+    return (max_reward() - min_reward())
+           # / (1 - gamma)
 def number_of_states():
     return N
 
@@ -60,14 +64,16 @@ def env_step(action):
     #print "xp: {} xdotp: {}".format(xp,xdotp)
     if action == 1:
         current_state += 1
-
+    noise = 0
+    if dp:
+        noise = np.random.laplace(scale=GS() / epsilon)
     if current_state >= N:
         current_state = None
-        return {'state':current_state,'reward':1.0,'isTerminal':True}
+        return {'state':current_state,'reward':1.0+noise,'isTerminal':True}
 
     # current_state = np.array([xp,xdotp])
 
-    return {'state':current_state,"reward":0,'isTerminal':False}
+    return {'state':current_state,"reward":0+noise,'isTerminal':False}
 
 def bound_x(x):
     if x>0.5:
