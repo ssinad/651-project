@@ -10,7 +10,7 @@
 import numpy as np
 
 current_state = None
-N = 100
+N = 10
 epsilon = 1
 dp = True
 
@@ -100,9 +100,11 @@ def env_message(in_message): # returns string, in_message: string
     ---------
     inMessage : string
         the message being passed
-
     Returns
     -------
     string : the response to the message
     """
+    global dp
+    if (in_message[0] == 'dp'):
+        dp = bool(str.split(in_message,':')[1])
     return ""

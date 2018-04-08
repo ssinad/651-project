@@ -106,7 +106,7 @@ def agent_cleanup():
     return
 
 def agent_message(in_message): # returns string, in_message: string
-    global v
+    global v, p
     """
     Arguments: in_message: string
     returns: The value function as a string.
@@ -118,6 +118,8 @@ def agent_message(in_message): # returns string, in_message: string
         # if dp:
         #     noise = np.random.laplace(size=v.shape, scale=GS() / epsilon)
         return v + noise
+    elif (in_message[0] == 'p'):
+        p = float(str.split(in_message,':')[1])
     else:
         return "I don't know what to return!!"
 
