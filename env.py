@@ -51,7 +51,7 @@ def env_step(action):
         dictionary with keys {reward, state, isTerminal} containing the results
         of the action taken
     """
-    global current_state
+    global current_state, epsilon
 
     # x,xdot = current_state
 
@@ -104,7 +104,9 @@ def env_message(in_message): # returns string, in_message: string
     -------
     string : the response to the message
     """
-    global dp
-    if (in_message[0] == 'dp'):
+    global dp, epsilon
+    if (in_message[0] == 'd'):
         dp = bool(str.split(in_message,':')[1])
+    if(in_message[0] == 'e'):
+        epsilon = float(str.split(in_message,':')[1])
     return ""
