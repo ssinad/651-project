@@ -9,10 +9,10 @@
 
 # from utils import rand_in_range, rand_un
 import numpy as np
-from env import number_of_states, max_reward, min_reward
-import pickle
+from env import max_reward, min_reward
+# import pickle
 
-N = number_of_states()
+N = 10  # default value
 p = 0.1
 gamma = 0.9
 seed = 0
@@ -24,8 +24,9 @@ dp = False
 epsilon = 1
 
 
-def GS():
+def gs():
     return (max_reward() - min_reward()) / (1 - gamma)
+
 
 def choose_action():
     toss = np.random.uniform()
@@ -35,6 +36,7 @@ def choose_action():
         action = 1
     return action
 
+
 def agent_init():
     global states, rewards
     states = []
@@ -43,7 +45,8 @@ def agent_init():
     Hint: Initialize the variables that need to be reset before each run begins
     Returns: nothing
     """
-    #initialize the policy array in a smart way
+    # initialize the policy array in a smart way
+
 
 def agent_start(state):
     global states, rewards
@@ -58,7 +61,7 @@ def agent_start(state):
     return action
 
 
-def agent_step(reward, state): # returns NumPy array, reward: floating point, this_observation: NumPy array
+def agent_step(reward, state):  # returns NumPy array, reward: floating point, this_observation: NumPy array
     """
     Arguments: reward: floting point, state: integer
     Returns: action: floating point
@@ -72,6 +75,7 @@ def agent_step(reward, state): # returns NumPy array, reward: floating point, th
     #     noise = np.random.laplace(scale=GS() / epsilon)
     rewards.append(reward)
     return action
+
 
 def agent_end(reward):
     """
@@ -98,6 +102,7 @@ def agent_end(reward):
     
     return
 
+
 def agent_cleanup():
     """
     This function is not used
@@ -105,21 +110,29 @@ def agent_cleanup():
     # clean up
     return
 
-def agent_message(in_message): # returns string, in_message: string
-    global v, p
+
+def agent_message(in_message):  # returns string, in_message: string
+    global v, p, num, N, epsilon, dp
     """
     Arguments: in_message: string
     returns: The value function as a string.
     This function is complete. You do not need to add code here.
     """
     # should not need to modify this function. Modify at your own risk
-    if (in_message == 'ValueFunction'):
+    if in_message == 'ValueFunction':
         noise = 0
-        # if dp:
-        #     noise = np.random.laplace(size=v.shape, scale=GS() / epsilon)
+        if dp:
+            noise = np.random.laplace(size=v.shape, scale=gs() / epsilon)
         return v + noise
-    elif (in_message[0] == 'p'):
-        p = float(str.split(in_message,':')[1])
+    elif 'dp' in in_message:
+        dp = True
+    elif in_message[0] == 'p':
+        p = float(in_message.split(':')[1])
+    elif "N" == in_message[0]:
+        N = int(in_message.split(':')[1])
+        v = np.zeros(N)  # [0 for tmp in range(N)]
+        num = np.zeros(N)
+    elif in_message[0] == "e":
+        epsilon = float(in_message.split(':')[1])
     else:
         return "I don't know what to return!!"
-

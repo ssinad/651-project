@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 # filename = 'Value.npy'
-files = ['dp.npy', 'non_dp.npy']
+files = ['idp.npy', 'non_dp.npy', 'odp.npy']
 for filename in files:
     if os.path.exists(filename):
         data = np.load(filename)
@@ -19,7 +19,7 @@ for filename in files:
         plt.legend()
 plt.show()
 util = np.load('util.npy')
-plt.xticks(np.arange(util.shape[0]), ('1.5', '1', '0.5'))
+plt.xticks(np.arange(util.shape[0]), np.logspace(np.log10(0.5), np.log10(1.5), num=3))  # ('0.5', '1', '1.5'))
 plt.plot(np.arange(0, util.shape[0]), util, label='util.npy')
 plt.xlabel('epsilons')
 plt.ylabel('utility measure')
