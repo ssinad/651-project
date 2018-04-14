@@ -19,7 +19,6 @@ def true_value_function(gamma, p, number_of_states):
     tmp = (1 - p * gamma) / gamma / (1 - p)
     return tmp ** (np.arange(number_of_states) - number_of_states) / gamma
 
-
 if __name__ == "__main__":
     num_episodes = 200
     num_runs = 5
