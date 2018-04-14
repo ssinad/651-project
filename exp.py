@@ -15,7 +15,6 @@ from rl_glue import *  # Required for RL-Glue
 import agent
 RLGlue("env", "agent")
 
-
 def true_value_function(gamma, p, number_of_states):
     tmp = (1 - p * gamma) / gamma / (1 - p)
     return tmp ** (np.arange(number_of_states) - number_of_states) / gamma
