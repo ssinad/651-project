@@ -19,8 +19,10 @@ for filename in files:
         plt.legend()
 plt.show()
 util = np.load('util.npy')
-plt.xticks(np.arange(util.shape[0]), np.logspace(np.log10(0.5), np.log10(1.5), num=3))  # ('0.5', '1', '1.5'))
-plt.plot(np.arange(0, util.shape[0]), util, label='util.npy')
+in_util, out_util = util.T
+plt.xticks(np.arange(in_util.shape[0]), np.logspace(np.log10(0.5), np.log10(1.5), num=3))  # ('0.5', '1', '1.5'))
+plt.plot(np.arange(0, in_util.shape[0]), in_util, label='in_util.npy')
+plt.plot(np.arange(0, out_util.shape[0]), out_util, label='out_util.npy')
 plt.xlabel('epsilons')
 plt.ylabel('utility measure')
 # plt.ylim([100,500])
