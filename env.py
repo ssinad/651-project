@@ -31,12 +31,14 @@ def gs():
 
 
 def env_init():
-    global current_state  # , start, num_total_states
+    global current_state, dp  # , start, num_total_states
+    dp = False
 
 
 def env_start():
     """ returns numpy array """
     global current_state
+
 
     # x = np.random.uniform(-0.6,-0.4)
     # current_state = np.array([x,0.0])
@@ -79,7 +81,7 @@ def env_step(action):
         return {'state': current_state, 'reward': 1.0 + noise, 'isTerminal': True}
 
     # current_state = np.array([xp,xdotp])
-
+    # print("env dp is " + str(dp))
     return {'state': current_state, "reward": 0+noise, 'isTerminal': False}
 
 
