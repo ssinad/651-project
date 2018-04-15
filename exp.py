@@ -23,7 +23,7 @@ if __name__ == "__main__":
     num_episodes = 200
     num_runs = 5
     N = 10
-    policies = [0.1, 0.8]  # lower is better
+    policies = [1, 0.8]  # lower is better
     dps = ["", "inp_per", "out_per"]
     # epsilons = [1.5, 1, 0.5]
     epsilons = list(np.logspace(np.log10(0.01), np.log10(1), num=25))
@@ -56,8 +56,8 @@ if __name__ == "__main__":
                     runs[r, :] = RL_agent_message("ValueFunction")
                 name = 'Value-'+str(p)+'-'+str(dp)
                 avg = np.average(runs, axis=0)
-                if dp == "":
-                    print("Real difference is", abs(avg - true_value_function(agent.gamma, p, N)))
+                # if dp == "":
+                    # print("Real difference is", abs(avg - true_value_function(agent.gamma, p, N)))
                 np.save(name, avg)
 
         files = ['Value-0.1-.npy', 'Value-0.1-inp_per.npy', 'Value-0.1-out_per.npy', 'Value-0.8-.npy',
