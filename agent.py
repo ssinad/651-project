@@ -38,9 +38,10 @@ def choose_action():
 
 
 def agent_init():
-    global states, rewards
+    global states, rewards, dp
     states = []
     rewards = []
+    dp = False
     """
     Hint: Initialize the variables that need to be reset before each run begins
     Returns: nothing
@@ -99,7 +100,7 @@ def agent_end(reward):
         returns[state] = return_so_far
     # v[states[i]] += 1 / N[states[i]] * (return_so_far - v[states[i]])
     v += (returns - v) / num
-    
+    # print("agent dp is " + str(dp))
     return
 
 

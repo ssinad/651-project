@@ -27,27 +27,29 @@ if __name__ == "__main__":
     policies = [0.1, 0.8]  # lower is better
     dps = ["", "inp_per", "out_per"]
     # epsilons = [1.5, 1, 0.5]
-    epsilons = list(np.logspace(np.log10(0.5), np.log10(1.5), num=3))
+    epsilons = list(np.logspace(np.log10(0.01), np.log10(1), num=25))
     utility = np.zeros((len(epsilons), 2))
-    RL_env_message("N:" + str(N))
-    RL_agent_message("N:" + str(N))
+
 
     for epsilon in epsilons:
-        RL_env_message("epsilon:" + str(epsilon))
         for p in policies:
             for dp in dps:
-                if dp == "inp_per":
-                    RL_env_message("dp")
-                elif dp == "out_per":
-                    RL_agent_message("dp")
                 runs = np.zeros((num_runs, N))
                 steps = np.zeros([num_runs, num_episodes])
-                RL_agent_message("p:"+str(p))
-
                 # RL_env_message("dp:" + str(dp))
                 for r in range(num_runs):
                     # print("run number : ", r + 1)
                     RL_init()
+                    if dp == "inp_per":
+                        RL_env_message("dp")
+                    elif dp == "out_per":
+                        RL_agent_message("dp")
+                    RL_env_message("epsilon:" + str(epsilon))
+                    RL_agent_message("epsilon:" + str(epsilon))
+                    RL_env_message("N:" + str(N))
+                    RL_agent_message("N:" + str(N))
+                    RL_agent_message("p:" + str(p))
+                    RL_env_message("p:" + str(p))
                     for e in range(num_episodes):
                         # print '\tepisode {}'.format(e+1)
                         RL_episode(0)
