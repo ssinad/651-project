@@ -23,7 +23,7 @@ if __name__ == "__main__":
     num_episodes = 200
     num_runs = 5
     N = 10
-    policies = [1, 0.8]  # lower is better
+    policies = [0, 0.8]  # lower is better
     dps = ["", "inp_per", "out_per"]
     # epsilons = [1.5, 1, 0.5]
     epsilons = list(np.logspace(np.log10(0.01), np.log10(1), num=25))
