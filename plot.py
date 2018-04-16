@@ -20,10 +20,14 @@ for filename in files:
 plt.show()
 util = np.load('util.npy')
 in_util, out_util = util.T
-plt.xticks(np.arange(in_util.shape[0]), np.logspace(np.log10(0.5), np.log10(1.5), num=3))  # ('0.5', '1', '1.5'))
-plt.plot(np.arange(0, in_util.shape[0]), in_util, label='in_util.npy')
-plt.plot(np.arange(0, out_util.shape[0]), out_util, label='out_util.npy')
-plt.xlabel('epsilons')
+# plt.xticks(np.arange(out_util.shape[0]), ('{:.2f}'.format(x) for x in np.logspace(np.log10(0.5), np.log10(1.5),
+#                                                                                   num=out_util.shape[0])))
+locs = np.logspace(np.log10(0.01), np.log10(1.0), num=out_util.shape[0])
+plt.xticks(locs, ("{:.2f}".format(x) for x in locs))
+# ('0.5', '1', '1.5'))
+plt.semilogx(locs, in_util, label='Input perturbation')
+plt.semilogx(locs, out_util, label='Output perturbation')
+plt.xlabel('$\epsilon$')
 plt.ylabel('utility measure')
 # plt.ylim([100,500])
 # plt.xlabel('episode')
